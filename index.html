@@ -6,44 +6,129 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
     <link rel="icon" href="bee.png">
+    <link rel="apple-touch-icon" href="bee.png">
 <style>
 
 body{
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   background-color: #f9ded7;
 }
 
-h1, h2, h3, p, input{
+h1, h2, h3, input{
   color: green;
   font-family: 'Balsamiq Sans', cursive;
   margin: 0;
 }
 
+p{
+  color: white;
+  font-family: 'Balsamiq Sans', cursive;
+  margin: 0;
+  font-size: 20px;
+  padding: 1em;
+}
+
+
 div{text-align: center;
 margin-top: 3em;}
 
+#secret{
+  width: 60%;
+  text-align: center;
+  margin: auto;
+  background-color: Transparent;
+  border-radius: 5px;
+  color: white;
+}
+
 img{
   width: 100px;
-  margin-top: 25vh;
+  margin-top: 20vh;
 }
 
 input{
-  margin: 1em 0 3em 0;
+  margin: 2em 0 0 0;
 }
 
-input[type=button]{
+input[type=submit]{
   background-color: #f39298;
   border: none;
   border-radius: 3px;
   padding: 10px;
   color: white;
+  margin-bottom: 3em;
+  font-size: 25px;
+  padding: 10px 20px;
 }
 
 input[type=text]{
   padding: 10px;
   border: none;
   border-radius: 3px;
+  text-align: center;
+  width:50%;
+  color: #f39298;
+  font-size: 25px;
 }
+
+@media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+h1{
+  font-size: 55px;
+  margin-bottom: 30px;
+}
+
+h3{
+  font-size: 45px;
+    margin-bottom: 40px;
+}
+input[type=text]{
+  font-size: 50px;
+  height: 3em;
+  width: 75%;
+  margin: .5em;
+  border-radius: 10px;
+  color: #f39298;
+}
+
+input[type=submit]{
+  font-size: 50px;
+  height: 3em;
+  width: 75%;
+    margin: .5em;
+    border-radius: 10px;
+    margin-bottom: 50px;
+
+}
+
+img{
+  width: 50vw;
+  margin-top: 8vh;
+}
+
+p{
+  font-size: 60px;
+  padding: 40px 30px
+}
+
+#secret{
+  width: 75%;
+  text-align: center;
+  margin: auto;
+  background-color: Transparent;
+  border-radius: 10px;
+  color: white;
+
+}
+
+
+  }
+
 
 </style>
 
@@ -53,29 +138,37 @@ input[type=text]{
 
     <div>
 
-<img src="flower.png" />
+<a href="https://github.com/ddemetz/state-facts/blob/master/index.html"><img src="flower.png" /></a>
 <h1> totally true facts about your state <h1/>
 <h3> What state do you live in? </h3>
 
 <form>
-<input id="state" type="text">
-<input type="button" value="Get ya fact!">
+<input id="state" type="text"><br>
+<input type="submit" value="Get Fact">
 </form>
+<div id=secret>
 
 <p id="empty"></p>
-
+</div>
     </div>
 
 <script>
 
 $(document).ready(function(){
 
+function noSubmit(event){
+  event.preventDefault();
+}
 
 
-$("input[type='button']").click(function(){
+$("input[type='submit']").click(function(sub){
+sub.preventDefault();
+
 var state=document.getElementById('state').value;
 
-state=state.toLowerCase();
+var secret = document.getElementById('secret');
+
+state=state.toLowerCase().trim();
 
 var stateNames = [
   'alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut',
@@ -87,13 +180,13 @@ var stateNames = [
   'vermont', 'virginia', 'washington', 'west virginia', 'wisconsin', 'wyoming'
 ];
 
-var facts = [`${state} is the biggest state in the world`, `${state} is the home of the green bean`, `${state} is the homestate of every person who lives in Spain today`, `${state} is where the world's largest potato is still growing today`, `${state} has the highest density of people who work a barn`, `${state} has the most bees i've seen`, `a poll in canada said most canadians cannot stand the scent of the maple syrup produced in ${state}`, `little to no dogs have swam in ${state} waterfalls`, `It's illegal to grow birch trees in ${state}`, `An ancient buriel ground was dug up in ${state} and is legally cursed`, `if you live in ${state} you've altually breathed air that was once in the lungs of former president Franklin Roosevelt`]
+var facts = [`${state} is the biggest state in the world`, `${state} is the home of the green bean`, `${state} is the homestate of every person who lives in Spain today`, `${state} is where the world's largest potato is still growing today`, `${state} has the highest density of people who work in a barn`, `${state} has the most bees i've seen`, `a poll in canada said most canadians cannot stand the scent of the maple syrup produced in ${state}`, `little to no dogs have swam in ${state} waterfalls`, `It's illegal to dress up birch trees in evening wear in ${state}`, `An ancient burial ground was dug up in ${state} and is legally cursed`, `if you live in ${state} you've actually breathed air that was once in the lungs of former president Franklin Roosevelt`]
 
 var factbox=document.getElementById('empty');
 
 
 if (stateNames.includes(state)==false || state == "")
-factbox.innerHTML="Please enter the name of a state";
+factbox.innerHTML="please enter the name of a state";
 
 else{
 
@@ -101,8 +194,12 @@ var ran= Math.random()*facts.length;
 ran = Math.floor(ran);
 fact = facts[ran];
 
+secret.style.backgroundColor = "#f6aeb0";
+
 factbox.innerHTML=`${fact}`;
 }
+
+
 
 });
 
