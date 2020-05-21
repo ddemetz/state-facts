@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Totally True State Facts</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  overflow: hidden;
+  background-color: #f9ded7;
+}
+
+h1, h2, h3, p, input{
+  color: green;
+  font-family: 'Balsamiq Sans', cursive;
+  margin: 0;
+}
+
+div{text-align: center;
+margin-top: 3em;}
+
+img{
+  width: 100px;
+  margin-top: 25vh;
+}
+
+input{
+  margin: 1em 0 3em 0;
+}
+
+input[type=button]{
+  background-color: #f39298;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  color: white;
+}
+
+input[type=text]{
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+}
+
+</style>
+
+
+  </head>
+  <body>
+
+    <div>
+
+<img src="flower.png" />
+<h1> totally true facts about your state <h1/>
+<h3> What state do you live in? </h3>
+
+<form>
+<input id="state" type="text">
+<input type="button" value="Get Value">
+</form>
+
+<p id="empty"></p>
+
+    </div>
+
+<script>
+
+$(document).ready(function(){
+
+
+
+$("input[type='button']").click(function(){
+var state=document.getElementById('state').value;
+
+state=state.toLowerCase();
+
+var stateNames = [
+  'alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut',
+  'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa', 'kansas',
+  'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan', 'minnesota',
+  'mississippi', 'missouri', 'montana', 'nebraska', 'nevada', 'new hampshire', 'new jersey',
+  'new mexico', 'new york', 'north carolina', 'north dakota', 'ohio', 'oklahoma', 'oregon',
+  'pennsylvania', 'rhode island', 'south carolina', 'south dakota', 'tennessee', 'texas', 'utah',
+  'vermont', 'virginia', 'washington', 'west virginia', 'wisconsin', 'wyoming'
+];
+
+var facts = [`${state} is the biggest state in the world`, `${state} is the home of the green bean`, `${state} is the homestate of every person who lives in Spain today`, `${state} is where the world's largest potato is still growing today`, `${state} has the highest density of people who work a barn`, `${state} has the most bees i've seen`, `a poll in canada said most canadians cannot stand the scent of the maple syrup produced in ${state}`, `little to no dogs have swam in ${state} waterfalls`]
+
+var factbox=document.getElementById('empty');
+
+
+if (stateNames.includes(state)==false || state == "")
+factbox.innerHTML="Please enter the name of a state";
+
+else{
+
+var ran= Math.random()*facts.length;
+ran = Math.floor(ran);
+fact = facts[ran];
+
+factbox.innerHTML=`${fact}`;
+}
+
+});
+
+});
+
+
+
+
+</script>
+
+
+  </body>
+</html>
